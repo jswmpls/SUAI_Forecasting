@@ -1,4 +1,6 @@
 import customtkinter as ctk
+import tkinter as tk
+import json
 
 class LizaWindow(ctk.CTkToplevel):
 
@@ -34,3 +36,27 @@ class LizaWindow(ctk.CTkToplevel):
     def go_back(self):
         self.destroy()
         self.main_app.deiconify()
+
+    # Функционал загрузки и отображения данных
+    def load_data(self, filepath="infection_data.json"):
+        """Автоматическая загрузка данных из JSON файла"""
+        with open(filepath, 'r', encoding='utf-8') as f:
+            self.data = json.load(f)
+        self.show_table()
+
+    def show_table(self):
+        """Отображение данных в табличном виде"""
+        if not self.data:
+            return
+
+        years = self.data["years"]
+        items = self.data["items"]
+
+        # Формируем строку с таблицей
+        table_text = "Год\t" + "\t".join(items.keys()) + "\n"
+        for year in years:
+            row = [str(items[item][years.index(year)]) for item in items]
+            table_text += f"{year}\t" + "\t".join(row) + "\n"
+
+        self.table.delete("1.0", tk.END)
+        self.table.insert("1.0", table_text)
