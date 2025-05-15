@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from Liza_window import LizaWindow
 
 # Основное окно приложения
 class App(ctk.CTk):
@@ -19,7 +20,11 @@ class App(ctk.CTk):
 
         # Кнопки для выбора варианта анализа
         ctk.CTkButton(self, text="Вариант Димы").pack(pady=10)
-        ctk.CTkButton(self, text="Вариант Лизы").pack(pady=10)
+        ctk.CTkButton(self, text="Вариант Лизы", command=self.open_liza_window).pack(pady=10)
+
+    def open_liza_window(self):
+        self.withdraw()  # Скрываем главное окно
+        LizaWindow(self)
 
 if __name__ == "__main__":
     app = App()
