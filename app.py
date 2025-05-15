@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from Liza_window import LizaWindow
+from DimaWindow import DimaWindow
 
 # Основное окно приложения
 class App(ctk.CTk):
@@ -19,12 +20,16 @@ class App(ctk.CTk):
         ctk.CTkLabel(self, text="Выберите вариант:", font=("Arial", 18)).pack(pady=20)
 
         # Кнопки для выбора варианта анализа
-        ctk.CTkButton(self, text="Вариант Димы").pack(pady=10)
+        ctk.CTkButton(self, text="Вариант Димы", command=self.open_dima_window).pack(pady=10)
         ctk.CTkButton(self, text="Вариант Лизы", command=self.open_liza_window).pack(pady=10)
 
     def open_liza_window(self):
         self.withdraw()  # Скрываем главное окно
         LizaWindow(self)
+
+    def open_dima_window(self):
+        self.withdraw()  # Скрываем главное окно
+        DimaWindow(self)
 
 if __name__ == "__main__":
     app = App()
