@@ -25,8 +25,17 @@ class DimaWindow(ctk.CTkToplevel):
         top_frame = ctk.CTkFrame(self)
         top_frame.pack(fill='x', padx=10, pady=5)
 
+        self.file_button = ctk.CTkButton(top_frame, text="Открыть файл", command=self.load_data)
+        self.file_button.pack(side='left', padx=5)
+
         self.forecast_entry = ctk.CTkEntry(top_frame, placeholder_text="Введите N лет для прогноза", width=200)
         self.forecast_entry.pack(side='left', padx=5)
+
+        self.forecast_button = ctk.CTkButton(top_frame, text="Показать прогноз", command=self.plot_forecast)
+        self.forecast_button.pack(side='left', padx=5)
+
+        self.back_button = ctk.CTkButton(top_frame, text="Назад", command=self.go_back)
+        self.back_button.pack(side='right', padx=5)
 
         self.table = ctk.CTkTextbox(self, height=150)
         self.table.pack(fill='x', padx=10, pady=5)
