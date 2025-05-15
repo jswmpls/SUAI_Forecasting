@@ -2,6 +2,7 @@ import customtkinter as ctk
 from Liza_window import LizaWindow
 from DimaWindow import DimaWindow
 
+
 # Основное окно приложения
 class App(ctk.CTk):
     def __init__(self):
@@ -30,6 +31,7 @@ class App(ctk.CTk):
     def open_dima_window(self):
         self.withdraw()  # Скрываем главное окно
         DimaWindow(self)
+
 
 if __name__ == "__main__":
     app = App()
