@@ -1,8 +1,10 @@
 from tkinter import filedialog
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 import customtkinter as ctk
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import json
 
 
@@ -120,8 +122,44 @@ class DimaWindow(ctk.CTkToplevel):
             )
             self.plot_output.insert("1.0", result_text)
 
+            # Построение графика
+            self.plot_graph(df, forecast_df)
+
         except Exception as e:
             self.plot_output.insert("1.0", f"Ошибка: {e}\n")
+
+    def plot_graph(self, history, forecast=None):
+        """Метод для построения графиков."""
+        for widget in self.plot_frame.winfo_children():
+            widget.destroy()
+
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        # Общая логика построения графиков
+        for column in history.columns:
+            ax.plot(history.index, history[column], label=column, linewidth=2)
+
+            if forecast is not None:
+                ax.plot(forecast.index, forecast[column], '--', alpha=0.7)
+                ax.fill_between(
+                    forecast.index,
+                    forecast[column] * 0.9,
+                    forecast[column] * 1.1,
+                    alpha=0.1
+                )
+
+        if forecast is not None:
+            ax.axvline(x=history.index[-1], color='red', linestyle=':', alpha=0.5)
+
+        ax.set_title("Динамика численности населения по регионам")
+        ax.set_xlabel("Год")
+        ax.set_ylabel("Численность населения")
+        ax.legend()
+        ax.grid(True)
+
+        canvas = FigureCanvasTkAgg(fig, self.plot_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True)
 
     def on_close(self):
         """Метод для остановки программы после закрытия окна."""
