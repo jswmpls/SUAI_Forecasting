@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+<<<<<<< HEAD
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (pythonProject_Games)" project-jdk-type="Python SDK" />
+=======
+  <component name="Black">
+    <option name="sdkName" value="Python 3.11 (PythonProject3)" />
+  </component>
+>>>>>>> 7b7dd04d6bb7d2a30268288af8f42b1e67cbb91f
+=======
+  <component name="Black">
+    <option name="sdkName" value="Python 3.11 (PythonProject3)" />
+  </component>
+>>>>>>> 728a0850745a7477d2afdceeb9ef874d30460ece
+</project>
