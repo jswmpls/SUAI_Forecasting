@@ -1,4 +1,7 @@
+from tkinter import filedialog
+import tkinter as tk
 import customtkinter as ctk
+import json
 
 
 class DimaWindow(ctk.CTkToplevel):
@@ -29,6 +32,35 @@ class DimaWindow(ctk.CTkToplevel):
 
         self.plot_frame = ctk.CTkFrame(self)
         self.plot_frame.pack(fill="both", expand=True, padx=10, pady=5)
+
+    def go_back(self):
+        """Закрывает текущее окно и возвращает пользователя в главное окно приложения."""
+        self.destroy()
+        self.main_app.deiconify()
+
+    def load_data(self):
+        """Загружает данные из JSON-файла, выбранного пользователем через диалоговое окно."""
+        filepath = filedialog.askopenfilename(filetypes=[("JSON files", "*.json")])
+        if filepath:
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    self.data = json.load(f)
+                self.show_table()
+            except Exception as e:
+                self.table.delete("1.0", tk.END)
+                self.table.insert("1.0", f"Ошибка загрузки файла: {e}")
+
+    def show_table(self):
+        """Форматирует и отображает загруженные данные в виде текстовой таблицы."""
+        if self.data:
+            years = self.data["years"]
+            items = self.data["items"]
+            table_str = "Год\t" + "\t".join(items.keys()) + "\n"
+            for year in years:
+                table_str += str(year) + "\t" + "\t".join(
+                    [str(items[item][years.index(year)]) for item in items]) + "\n"
+            self.table.delete("1.0", tk.END)
+            self.table.insert("1.0", table_str)
 
     def on_close(self):
         """Метод для остановки программы после закрытия окна."""
