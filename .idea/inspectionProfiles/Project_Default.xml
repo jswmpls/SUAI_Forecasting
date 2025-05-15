@@ -1,6 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+<<<<<<< HEAD
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
@@ -110,5 +111,8 @@
         </list>
       </option>
     </inspection_tool>
+=======
+    <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+>>>>>>> 7b7dd04d6bb7d2a30268288af8f42b1e67cbb91f
   </profile>
 </component>
